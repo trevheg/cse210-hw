@@ -1,0 +1,17 @@
+Class: Job
+Attributes:
+* _companyName : string
+* _jobTitle : string
+* _startYear : int
+* _endYear : int
+
+Behaviors:
+* DisplayJobInfo() : void // Displays the job information in the format "Job Title (Company) StartYear-EndYear"
+
+Class: Resume
+Attributes: 
+* _name : string 
+* _jobs : List<Job>
+
+Behaviors: 
+* DisplayResume() : void 
