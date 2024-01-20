@@ -1,0 +1,39 @@
+Class: Program
+Attributes:
+
+Behaviors:
+
+
+Class: Journal
+Attributes: 
+* _entries : List<entry>
+
+Behaviors:
+* GetEntries(file : string) : List<Entry>
+* DisplayEntries() : void 
+* CreateEntry() : Entry
+* SaveEntries(file : string) : void
+* DisplayMenu() : void 
+
+
+
+Class: Entry
+Attributes:
+*_date : string
+*_prompt : string
+*_entry : string
+
+Behaviors:
+* DisplayEntry() : void
+
+
+Class: PromptGenerator
+Attributes:
+* _prompts : List<string>
+
+Behaviors:
+* GivePrompt() : string
+
+
+
+
