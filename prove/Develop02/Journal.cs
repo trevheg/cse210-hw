@@ -2,23 +2,29 @@ public class Journal
 {
     public List<Entry> _entries = new List<Entry>();
 
-    // public void AddEntry(Entry newEntry)
     public void AddEntry()
     {
+        // Creates a new journal entry from the user and adds it to the list of entries. 
+
+        // Create a new entry object
         Entry newEntry = new Entry();
-        // Get the date
+        // Get the current date 
+        // add it to the entry object
+        // and display it
         DateTime timeNow = DateTime.Now;
         newEntry._date = timeNow.ToShortDateString();
         Console.WriteLine(newEntry._date);
-        // Get the prompt
+        // Get the prompt 
+        // add it to the entry object
+        // and display it
         PromptGenerator prompt = new PromptGenerator();
         newEntry._promptText = prompt.GetRandomPrompt();
         Console.WriteLine(newEntry._promptText);
-        // Get the entry
+        // Get the entry from the user
+        // and add it to the entry object
         newEntry._entryText = Console.ReadLine();
         // Add the new entry to the List of entries
         _entries.Add(newEntry);
-
     }
 
     public void DisplayAll()
