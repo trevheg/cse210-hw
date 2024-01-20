@@ -2,6 +2,9 @@ using System;
 using System.IO;
 using System.IO.Enumeration;
 
+// Above and beyond report: I added two extra features to the program. 
+// The first is an option to delete a journal entry. 
+// The second is a warning if someone wrote a new entry and tried to exit without saving. 
 
 class Program
 {
@@ -52,10 +55,9 @@ class Program
             {
                 // Write a new entry
                 // Finish this one
-                // Entry entry = new Entry();
-                // journal.AddEntry(entry);
                 journal.AddEntry();
                 entryMade = true;
+                fileSaved = false;
             }
             else if (userChoice == 4)
             {
@@ -65,7 +67,6 @@ class Program
             else if (userChoice == 5)
             {
                 // Save entries to file
-                // Finish this one
                 Console.Write("Please enter the name of the file: ");
                 string fileName = Console.ReadLine();
                 Console.WriteLine("Saving Entries...");
@@ -75,9 +76,8 @@ class Program
             }
             else if (userChoice == 6)
             {
-                // Exit
-                // Finish this one
-                // Consider adding a warning if they are exiting without saving
+                // Exit the program 
+                // added a warning if they try to exit without saving a new entry. 
                 if (entryMade == true && fileSaved == false)
                 {
                     Console.Write("Are you sure you want to exit without saving your new entry? (y/n) ");
