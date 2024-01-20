@@ -24,11 +24,18 @@ public class Journal
     public void DisplayAll()
     {
         Console.WriteLine();
-        foreach(Entry dayEntry in _entries)
+        for(int i = 0; i < _entries.Count; i++ )
         {
-            dayEntry.DisplayEntry();
+            int entryNumb = i + 1;
+            Console.WriteLine(entryNumb);
+            _entries[i].DisplayEntry();
             Console.WriteLine();
         }
+        // foreach (Entry entry in _entries)
+        // {
+        //     entry.DisplayEntry();
+        //     Console.WriteLine();
+        // }
     }
 
     public void SaveToFile(string fileName)
@@ -63,5 +70,39 @@ public class Journal
             entry._entryText = entryParts[2];
             _entries.Add(entry);
         }
+    }
+
+    public void EraseEntry()
+    {
+        // Erases an entry from _entries
+        // Ask the user which entry they want to delete
+        Console.WriteLine("Which journal entry do you wish to delete?");
+        Console.Write("Please enter a number (Enter 0 to cancel): ");
+        int userChoice = (int.Parse(Console.ReadLine()) - 1);
+        // exit if the user chose 0
+        if (userChoice == -1)
+        {
+            return;
+        }
+        else
+        {
+            // ask the user if they are sure
+            Console.WriteLine("This is the selected entry:");
+            _entries[userChoice].DisplayEntry();
+            Console.WriteLine("Do you wish to Delete it? (y/n): ");
+            string yesNo = Console.ReadLine();
+            if (yesNo == "y")
+            {
+                Console.WriteLine("Deleting entry...");
+                _entries.RemoveAt(userChoice);
+                Console.WriteLine("Entry Deleted.");
+
+            }
+            else
+            {
+                return;
+            }
+        }
+
     }
 }

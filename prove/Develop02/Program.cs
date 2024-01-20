@@ -17,15 +17,17 @@ class Program
 
 
         // The loop where the user makes their choices
-        while (userChoice != 5)
+        while (userChoice != 6)
         {
             // Show user their choices and take their decision.
             Console.WriteLine("Please make a selection:");
             Console.WriteLine("1. Open File.");
             Console.WriteLine("2. Display All Entries.");
             Console.WriteLine("3. Write New Entry.");
-            Console.WriteLine("4. Save Entries To File.");
-            Console.WriteLine("5. Quit.");
+            Console.WriteLine("4. Delete an Entry.");
+            Console.WriteLine("5. Save Entries To File.");
+            Console.WriteLine("6. Quit.");
+            Console.Write("What would you like to do? ");
             userChoice = int.Parse(Console.ReadLine());
 
             if (userChoice == 1)
@@ -54,6 +56,11 @@ class Program
             }
             else if (userChoice == 4)
             {
+                // delete an entry
+                journal.EraseEntry();
+            }
+            else if (userChoice == 5)
+            {
                 // Save entries to file
                 // Finish this one
                 Console.Write("Please enter the name of the file: ");
@@ -62,7 +69,7 @@ class Program
                 journal.SaveToFile(fileName);
                 Console.WriteLine("Entries Saved!");
             }
-            else if (userChoice == 5)
+            else if (userChoice == 6)
             {
                 // Exit
                 // Finish this one
