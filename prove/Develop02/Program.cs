@@ -14,6 +14,8 @@ class Program
 
         int userChoice = 0;
         Journal journal = new Journal();
+        bool entryMade = false;
+        bool fileSaved = false;
 
 
         // The loop where the user makes their choices
@@ -53,6 +55,7 @@ class Program
                 // Entry entry = new Entry();
                 // journal.AddEntry(entry);
                 journal.AddEntry();
+                entryMade = true;
             }
             else if (userChoice == 4)
             {
@@ -68,13 +71,31 @@ class Program
                 Console.WriteLine("Saving Entries...");
                 journal.SaveToFile(fileName);
                 Console.WriteLine("Entries Saved!");
+                fileSaved = true;
             }
             else if (userChoice == 6)
             {
                 // Exit
                 // Finish this one
                 // Consider adding a warning if they are exiting without saving
-                Console.WriteLine("Good Bye!");
+                if (entryMade == true && fileSaved == false)
+                {
+                    Console.Write("Are you sure you want to exit without saving your new entry? (y/n) ");
+                    string yesNo = Console.ReadLine();
+                    if (yesNo == "y")
+                    {
+                        Console.WriteLine("Good Bye!");
+                    }
+                    else
+                    {
+                        userChoice = 0;
+                    }
+                }
+                else 
+                {
+                    Console.WriteLine("Good Bye!");
+                }
+                
             }
         }
         
