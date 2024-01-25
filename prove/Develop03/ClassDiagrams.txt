@@ -1,0 +1,54 @@
+// What does the program do?
+    // Store a scripture 
+    // Store the scripture reference and the text 
+    // when the user presses enter, erase some of the words randomly
+    // this continues until all the words are hidden
+    // 
+// user input
+    // user typing quit to quit
+    // pressing enter to erase more words
+// what output
+    // the scripture
+    // clears screen and displays scripture with words removed
+// how dows program end
+    // user types quit
+
+class: Main
+
+class: Scripture
+// constructor accepts reference and text
+Attributes:
+* _reference : Reference 
+* _text : List<Word>
+
+Behaviors: 
+* DisplayScripture() : void
+* HideWords(numberToHide : int) : void
+* IsCompletelyHidden() : bool
+________
+
+class: Reference
+Attributes:
+* _book : string
+* _chapter : int
+// if reference has one value
+* _firstVerse : int
+// if reference is given multiple arguments?
+* _lastVerse : int 
+
+Behaviors:
+* Reference(book : string, chapter : int, firstVerse : int)
+* Reference(book : string, chapter : int, firstVerse : int, lastVerse : int)
+* GetDisplayText() : string
+// will return slightly differenly if one or multiple verses
+________
+
+class: Word
+Attributes:
+* _text : string
+* _display : bool
+
+Behaviors:
+* GetDisplayText() : string // return _word, or return _____
+* Hide() : void // changes _display to false
+* IsHidden() : bool
