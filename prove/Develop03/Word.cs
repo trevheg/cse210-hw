@@ -22,9 +22,7 @@ public class Word
         else 
         {
             return _blankText;
-        }
-
-        
+        }       
     }
 
     public void Hide()
@@ -43,5 +41,4 @@ public class Word
             return false;
         }
     }
-
 }
