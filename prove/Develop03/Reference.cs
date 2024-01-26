@@ -4,6 +4,7 @@ public class Reference
     private int _chapter;
     private int _firstVerse;
     private int _lastVerse;
+
     public Reference(string book, int chapter, int firstVerse)
     {
         _book = book;
@@ -29,18 +30,18 @@ public class Reference
             _chapter.ToString() + ": " +
             _firstVerse.ToString() + 
             // I'm pleased with this bit of code. It divides the verses with a comma if there are two verses and with a hyphen if there are more. 
-            ((_lastVerse == (_firstVerse + 1)) ? ", " : "-") +
-            _lastVerse.ToString());
+
+            (_lastVerse != _firstVerse 
+            ?   ((_lastVerse == (_firstVerse + 1)) 
+                ? ", " 
+                : "-") + _lastVerse.ToString() 
+            : ""));
         }
         else
         {
             return (_book + " " + 
             _chapter.ToString() + ": " +
             _firstVerse.ToString());
-        }
-
-
-        
+        }        
     }
-
 }

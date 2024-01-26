@@ -32,15 +32,15 @@ public class Word
         _display = false;
     }
 
-    public bool IsHidden()
+    public bool IsShown()
     {
         if (_display == true )
         {
-            return false;
+            return true;
         } 
         else
         {
-            return true;
+            return false;
         }
     }
 
