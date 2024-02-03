@@ -11,7 +11,7 @@ public class Activity
 
     public void DisplayStartingMessage()
     {
-
+        // Console.WriteLine
     }
 
     public void DisplayEndingMessage()
@@ -41,6 +41,12 @@ public class Activity
 
     public void ShowCountDown(int seconds)
     {
-        
+        for (int i = seconds; i > 0; i--)
+        {
+            Console.Write(i);
+            Thread.Sleep(1000);
+            Console.Write("\b \b");
+
+        }
     }
 }
