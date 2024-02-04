@@ -1,33 +1,43 @@
 public class Activity
 {
-    private string _name;
-    private string _description;
-    private int _duration;
+    protected string _name;
+    protected string _description;
+    protected int _duration;
 
     public Activity()
     {
-        
+
     }
 
     public void DisplayStartingMessage()
     {
-        // Console.WriteLine
+        Console.Clear();
+        Console.WriteLine($"Welcome to {_name}.");
+        Console.WriteLine(_description);
+        ShowSpinner(5);
+        Console.Write("How many seconds would you like to do this? ");
+        _duration = int.Parse(Console.ReadLine());
+
     }
 
     public void DisplayEndingMessage()
     {
-
+        Console.Clear();
+        Console.WriteLine($"We hope you enjoyed the {_name}.\n");
+        ShowSpinner(3);
+        Console.WriteLine($"You did it for {_duration} seconds. Good job!");
+        ShowSpinner(3);
     }
 
     public void ShowSpinner(int seconds)
     {
-        var aniList = new List<string> {"|", "/", "-", "\\"};
+        var aniList = new List<string> { "|", "/", "-", "\\" };
         int aniPlace = 0;
         DateTime startTime = DateTime.Now;
         DateTime stopTime = startTime.AddSeconds(seconds);
         do
         {
-            Console.Write(aniList[aniPlace]); 
+            Console.Write(aniList[aniPlace]);
             Thread.Sleep(200);
             Console.Write("\b \b");
             aniPlace++;
@@ -36,7 +46,7 @@ public class Activity
                 aniPlace = 0;
             }
         } while (DateTime.Now < stopTime);
-        
+
     }
 
     public void ShowCountDown(int seconds)
