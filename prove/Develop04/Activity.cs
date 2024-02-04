@@ -17,15 +17,14 @@ public class Activity
         ShowSpinner(5);
         Console.Write("How many seconds would you like to do this? ");
         _duration = int.Parse(Console.ReadLine());
+        Console.Clear();
 
     }
 
     public void DisplayEndingMessage()
     {
-        Console.Clear();
-        Console.WriteLine($"We hope you enjoyed the {_name}.\n");
-        ShowSpinner(3);
-        Console.WriteLine($"You did it for {_duration} seconds. Good job!");
+        // Console.Clear();
+        Console.WriteLine($"You did the {_name} for {_duration} seconds. Good job!");
         ShowSpinner(3);
     }
 
@@ -51,6 +50,7 @@ public class Activity
 
     public void ShowCountDown(int seconds)
     {
+        Console.Write("Get ready in: ");
         for (int i = seconds; i > 0; i--)
         {
             Console.Write(i);
@@ -58,5 +58,6 @@ public class Activity
             Console.Write("\b \b");
 
         }
+        Console.WriteLine();
     }
 }

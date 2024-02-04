@@ -3,7 +3,9 @@ public class ReflectingActivity : Activity
     private List<string> _prompts;
     private List<string> _questions;
 
-    private List<int> _alreadyUsed;
+    private List<int> _alreadyUsedQuestion;
+    private List<int> _alreadyUsedPrompt;
+
 
     public ReflectingActivity()
     {
@@ -26,13 +28,13 @@ public class ReflectingActivity : Activity
             "What did you learn about yourself through this experience?",
             "How can you keep this experience in mind in the future?"
         };
-        _alreadyUsed = new List<int>();
+        _alreadyUsedQuestion = new List<int>();
+        _alreadyUsedPrompt = new List<int>();
     }
 
     public void Run()
     {
         DisplayStartingMessage();
-        Console.Clear();
         DisplayPrompt();
         DisplayQuestions();
         DisplayEndingMessage();
@@ -41,7 +43,29 @@ public class ReflectingActivity : Activity
     public string GetRandomPrompt()
     {
         Random r = new Random();
-        return _prompts[r.Next(_prompts.Count)];
+        int newPrompt;
+        bool containsPrompt;
+
+        do
+        {
+            newPrompt = r.Next(_prompts.Count);
+            if (!_alreadyUsedPrompt.Contains(newPrompt))
+            {
+                _alreadyUsedPrompt.Add(newPrompt);
+                containsPrompt = false;
+            }
+            else
+            {
+                containsPrompt = true;
+            }
+            if (_alreadyUsedPrompt.Count == _prompts.Count)
+            {
+                _alreadyUsedPrompt.Clear();
+            }
+        } while (!containsPrompt);
+
+        newPrompt = r.Next(_prompts.Count);
+        return _prompts[newPrompt];
     }
 
     public string GetRandomQuestion()
@@ -52,14 +76,18 @@ public class ReflectingActivity : Activity
         do
         {
             newPrompt = r.Next(_questions.Count);
-            if (!_alreadyUsed.Contains(newPrompt))
+            if (!_alreadyUsedQuestion.Contains(newPrompt))
             {
-                _alreadyUsed.Add(newPrompt);
+                _alreadyUsedQuestion.Add(newPrompt);
                 containsPrompt = false;
             }
             else
             {
                 containsPrompt = true;
+            }
+            if (_alreadyUsedQuestion.Count == _prompts.Count)
+            {
+                _alreadyUsedQuestion.Clear();
             }
 
         } while (containsPrompt);
@@ -68,13 +96,17 @@ public class ReflectingActivity : Activity
 
     public void DisplayPrompt()
     {
-        System.Console.WriteLine(GetRandomPrompt());
+        string prompt = GetRandomPrompt();
+        Console.WriteLine(prompt);
         ShowCountDown(9);
+        Console.Clear();
+        Console.WriteLine(prompt);
+
 
     }
     public void DisplayQuestions()
     {
-        
+
         DateTime startTime = DateTime.Now;
         DateTime stopTime = startTime.AddSeconds(_duration);
         do

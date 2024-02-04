@@ -10,7 +10,6 @@ public class BreathingActivity : Activity
     public void Run()
     {
         DisplayStartingMessage();
-        Console.Clear();
         Breathe();
         DisplayEndingMessage();
     }
@@ -21,7 +20,6 @@ public class BreathingActivity : Activity
             "In a moment I will ask you to breathe in and out with the animation.\n" +
             "Breathe in as the bar expands and breathe out as it contracts. "
         );  
-        Console.Write("Get ready in: ");
 
         ShowCountDown(5);   
         DateTime startTime = DateTime.Now;
@@ -42,6 +40,7 @@ public class BreathingActivity : Activity
                 Console.Write("\b \b");
             } 
         } while (DateTime.Now < stopTime);
+        Console.Clear();
 
     }
 }

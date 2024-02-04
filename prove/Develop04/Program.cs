@@ -1,7 +1,8 @@
 using System;
 // Exceeding requirements
-// ReflectingActivity.GetRandomQuestions ensures that no duplicate questions are asked
+// ReflectingActivity and Listing Activity have loops that ensure that the same questions and prompts are not asked twice until all the questions/prompts have been shown already.
 // BreathingActivity has a function called Breathe which shows an expanding and retracting bar that guides users through breathing. 
+
 class Program
 {
     static void Main(string[] args)
@@ -9,10 +10,10 @@ class Program
         BreathingActivity ba = new BreathingActivity();
         ReflectingActivity ra = new ReflectingActivity();
         ListingActivity la = new ListingActivity();
-        Console.Clear();
         bool userQuit = false;
         do
         {
+            Console.Clear();
             Console.WriteLine(
                 "Welcome to Mindfulness Master!\n" +
                 "Pick one:\n" +
