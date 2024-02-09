@@ -14,7 +14,13 @@ public class EternalGoal : Goal
     }
     public override string GetDetailsString()
     {
-        return "";
+        string checkbox = "[ ]";
+        // if (IsComplete())
+        // {
+        //     checkbox = "[X]";
+        // }
+        string oldString = base.GetDetailsString();
+        return $"{checkbox} {oldString}";
     }
     public override string GetStringRepresentation()
     {

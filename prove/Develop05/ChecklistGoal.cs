@@ -21,7 +21,13 @@ public class ChecklistGoal : Goal
     }
     public override string GetDetailsString()
     {
-        return "";
+        string checkbox = "[ ]";
+        if (IsComplete())
+        {
+            checkbox = "[X]";
+        }
+        string oldString = base.GetDetailsString();
+        return $"{checkbox} {oldString} ({_amountCompleted}/{_target}) Bonus: {_bonus}";
     }
     public override string GetStringRepresentation()
     {

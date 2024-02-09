@@ -15,11 +15,11 @@ public class GoalManager
     {
         // This function has the main loop with the main menu.
         bool userQuit = false;
+        Console.Clear();
+        System.Console.WriteLine("Welcome to Goalmaster!");
         while (!userQuit)
         {
-            Console.Clear();
             Console.WriteLine(
-                "Welcome to Goalmaster!\n" +
                 $"You have {_score} points.\n\n" +
                 "Menu Options:\n" +
                 " 1. Create New Goal\n" +
@@ -37,7 +37,7 @@ public class GoalManager
                     CreateGoal();
                     break;
                 case 2:
-                    ListGoalNames();
+                    ListGoals();
                     break;
                 case 3:
                     SaveGoals();
@@ -60,16 +60,17 @@ public class GoalManager
 
     }
 
-    public void ListGoalNames()
+    public void ListGoals()
     {
-
+        int index = 0;
+        foreach (Goal goal in _goals)
+        {
+            System.Console.WriteLine($"{index}. {goal.GetDetailsString()}");
+            index++;
+            System.Console.WriteLine("");
+        }
     }
 
-    public void ListGoalDetails()
-    {
-
-
-    }
 
     public void CreateGoal()
     {
