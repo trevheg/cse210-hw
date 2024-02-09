@@ -7,14 +7,13 @@ public class SimpleGoal : Goal
         _isComplete = false;
     }
 
-    public override void RecordEvent()
-    {
-
-    }
-    public override bool IsComplete()
-    {
-        return true;
-    }
+    // public override int RecordEvent()
+    // {
+    // }
+    // public override bool IsComplete()
+    // {
+    //     return true;
+    // }
     public override string GetDetailsString()
     {
         string checkbox = "[ ]";

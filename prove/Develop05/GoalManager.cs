@@ -19,8 +19,8 @@ public class GoalManager
         System.Console.WriteLine("Welcome to Goalmaster!");
         while (!userQuit)
         {
+            DisplayPlayerInfo();
             Console.WriteLine(
-                $"You have {_score} points.\n\n" +
                 "Menu Options:\n" +
                 " 1. Create New Goal\n" +
                 " 2. List Goals\n" +
@@ -54,24 +54,24 @@ public class GoalManager
             }
         }
     }
-
     public void DisplayPlayerInfo()
     {
-
+        Console.WriteLine($"You have {_score} points.");
     }
-
     public void ListGoals()
     {
-        int index = 0;
+        int index = 1;
         foreach (Goal goal in _goals)
         {
             System.Console.WriteLine($"{index}. {goal.GetDetailsString()}");
             index++;
             System.Console.WriteLine("");
         }
+        if (_goals.Count == 0)
+        {
+            Console.WriteLine("You have zero goals.");
+        }
     }
-
-
     public void CreateGoal()
     {
         Console.Clear();
@@ -106,10 +106,13 @@ public class GoalManager
                 break;
         }
     }
-
     public void RecordEvent()
     {
-
+        System.Console.Write("Which goal did you accomplish? ");
+        int userChoice = int.Parse(Console.ReadLine()) - 1;
+        int points = _goals[userChoice].RecordEvent();
+        _score += points;
+        System.Console.WriteLine($"You earned {points} points.");
     }
 
     public void SaveGoals()

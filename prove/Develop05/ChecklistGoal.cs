@@ -11,14 +11,25 @@ public class ChecklistGoal : Goal
         _bonus = bonus;
     }
 
-    public override void RecordEvent()
+    public override int RecordEvent()
     {
-
+        int points = 0;
+        if (_amountCompleted == _target)
+        {
+            points += base.RecordEvent();
+            points += _bonus;
+        }
+        else if (_amountCompleted < _target)
+        {
+        points += base.GetPoints();
+        }
+        _amountCompleted++;
+        return points;
     }
-    public override bool IsComplete()
-    {
-        return true;
-    }
+    // public override bool IsComplete()
+    // {
+    //     return true;
+    // }
     public override string GetDetailsString()
     {
         string checkbox = "[ ]";
