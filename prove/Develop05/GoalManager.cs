@@ -89,7 +89,8 @@ public class GoalManager
             "What kind of goal do you want to make?\n" +
             " 1. One-time Goal\n" +
             " 2. Repeating Goal\n" +
-            " 3. Number-of-times Goal\n"
+            " 3. Number-of-times Goal\n" +
+            " 4. Daily Goal\n"
         );
         Console.Write("Select a choice from the menu: ");
         int userAnswer = int.Parse(Console.ReadLine());
@@ -114,6 +115,10 @@ public class GoalManager
                 Console.WriteLine("Please enter your bonus points if you manage to do it that many times:");
                 int bonus = int.Parse(Console.ReadLine());
                 _goals.Add(new ChecklistGoal(name, description, points, complete, target, bonus));
+                break;
+            case 4:
+                _goals.Add(new DailyGoal(name, description, points, false));
+
                 break;
         }
         Console.Clear();
@@ -167,6 +172,9 @@ public class GoalManager
                     break;
                 case "ChecklistGoal":
                     _goals.Add(new ChecklistGoal(goalParts[1], goalParts[2], int.Parse(goalParts[3]), int.Parse(goalParts[4]), int.Parse(goalParts[5]), int.Parse(goalParts[6])));
+                    break;
+                case "DailyGoal":
+                    _goals.Add(new DailyGoal(goalParts[1], goalParts[2], int.Parse(goalParts[3]), bool.Parse(goalParts[4]), DateTime.Parse(goalParts[5]).Date));
                     break;
             }
         }

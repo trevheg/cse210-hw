@@ -1,4 +1,2 @@
-13
-ChecklistGoal|1|2|3|2|2|4
-SimpleGoal|zxcv|xcvb|2|False
-SimpleGoal|sdfg|dfgh|3|True
+4
+DailyGoal|asdf|sdfg|4|False|2/9/2024 12:00:00 AM
