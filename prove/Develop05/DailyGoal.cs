@@ -1,3 +1,5 @@
+// couldn't quite get this to work. 
+
 public class DailyGoal : Goal
 {
     private string _shortName;
