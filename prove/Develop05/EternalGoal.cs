@@ -1,29 +1,31 @@
 public class EternalGoal : Goal
 {
+    private string _shortName;
+    private string _description;
+    private int _points;
+
     public EternalGoal(string name, string description, int points) : base(name, description, points)
     {
+        _shortName = name;
+        _description = description;
+        _points = points;
     }
 
-    // public override void RecordEvent()
-    // {
+    public override int RecordEvent()
+    {
+        return _points;
 
-    // }
-    // public override bool IsComplete()
-    // {
-    //     return true;
-    // }
+    }
+
     public override string GetDetailsString()
     {
         string checkbox = "[ ]";
-        // if (IsComplete())
-        // {
-        //     checkbox = "[X]";
-        // }
         string oldString = base.GetDetailsString();
         return $"{checkbox} {oldString}";
     }
     public override string GetStringRepresentation()
     {
-        return "";
+        
+        return $"{this.GetType()}|{_shortName}|{_description}|{_points}";
     }
 }

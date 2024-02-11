@@ -1,19 +1,27 @@
 public class SimpleGoal : Goal
 {
+    private string _shortName;
+    private string _description;
+    private int _points;
     private bool _isComplete;
 
-    public SimpleGoal(string name, string description, int points) : base(name, description, points)
+    public SimpleGoal(string name, string description, int points, bool isComplete) : base(name, description, points)
     {
-        _isComplete = false;
+        _shortName = name;
+        _description = description;
+        _points = points;
+        _isComplete = isComplete;
     }
 
-    // public override int RecordEvent()
-    // {
-    // }
-    // public override bool IsComplete()
-    // {
-    //     return true;
-    // }
+    public override int RecordEvent()
+    {
+        _isComplete = true;
+        return _points;
+    }
+    public bool IsComplete()
+    {
+        return _isComplete;
+    }
     public override string GetDetailsString()
     {
         string checkbox = "[ ]";
@@ -26,6 +34,7 @@ public class SimpleGoal : Goal
     }
     public override string GetStringRepresentation()
     {
-        return "";
+        
+        return $"{this.GetType()}|{_shortName}|{_description}|{_points}|{_isComplete}";
     }
 }

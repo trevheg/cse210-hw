@@ -1,0 +1,4 @@
+13
+ChecklistGoal|1|2|3|2|2|4
+SimpleGoal|zxcv|xcvb|2|False
+SimpleGoal|sdfg|dfgh|3|True

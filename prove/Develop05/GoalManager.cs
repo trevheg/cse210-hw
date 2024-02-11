@@ -1,4 +1,4 @@
-using System.Runtime.InteropServices;
+using System.IO;
 
 public class GoalManager
 {
@@ -17,20 +17,24 @@ public class GoalManager
         bool userQuit = false;
         Console.Clear();
         System.Console.WriteLine("Welcome to Goalmaster!");
-        while (!userQuit)
+        do
         {
             DisplayPlayerInfo();
+            
             Console.WriteLine(
+                "\n" +
                 "Menu Options:\n" +
                 " 1. Create New Goal\n" +
                 " 2. List Goals\n" +
                 " 3. Save Goals\n" +
                 " 4. Load Goals\n" +
                 " 5. Record Event\n" +
-                " 6. Quit"
+                " 6. Delete Goal\n" +
+                " 7. Quit"
             );
             Console.Write("Select a choice from the menu: ");
             int userAnswer = int.Parse(Console.ReadLine());
+            Console.Clear();
             switch (userAnswer)
             {
                 case 1:
@@ -49,10 +53,15 @@ public class GoalManager
                     RecordEvent();
                     break;
                 case 6:
+                    DeleteGoal();
+                    break;
+                case 7:
                     userQuit = true;
+                    System.Console.WriteLine("Good luck with your goals!");
+                    System.Console.WriteLine("Good Bye!");
                     break;
             }
-        }
+        } while  (!userQuit);
     }
     public void DisplayPlayerInfo()
     {
@@ -60,6 +69,7 @@ public class GoalManager
     }
     public void ListGoals()
     {
+        System.Console.WriteLine("Your goals: ");
         int index = 1;
         foreach (Goal goal in _goals)
         {
@@ -85,43 +95,99 @@ public class GoalManager
         int userAnswer = int.Parse(Console.ReadLine());
         Console.WriteLine("Please write the name of this goal:");
         string name = Console.ReadLine();
-        System.Console.WriteLine("Please write a short description of this goal:");
+        Console.WriteLine("Please write a short description of this goal:");
         string description = Console.ReadLine();
-        System.Console.WriteLine("Please input how many points this goal is worth:");
+        Console.WriteLine("Please input how many points this goal is worth:");
         int points = int.Parse(Console.ReadLine());
         switch (userAnswer)
         {
             case 1:
-                _goals.Add(new SimpleGoal(name, description, points));
+                _goals.Add(new SimpleGoal(name, description, points, false));
                 break;
             case 2:
                 _goals.Add(new EternalGoal(name, description, points));
                 break;
             case 3:
-                System.Console.WriteLine("Please enter how many times you want to complete this goal:");
+                Console.WriteLine("Please enter how many times you want to complete this goal:");
                 int target = int.Parse(Console.ReadLine());
-                System.Console.WriteLine("Please enter your bonus points if you manage to do it that many times:");
+                int complete = 0;
+                Console.WriteLine("Please enter your bonus points if you manage to do it that many times:");
                 int bonus = int.Parse(Console.ReadLine());
-                _goals.Add(new ChecklistGoal(name, description, points, target, bonus));
+                _goals.Add(new ChecklistGoal(name, description, points, complete, target, bonus));
                 break;
         }
+        Console.Clear();
+        System.Console.WriteLine("Goal Created:");
+        System.Console.WriteLine($"{_goals.Last().GetDetailsString()}");
     }
     public void RecordEvent()
     {
-        System.Console.Write("Which goal did you accomplish? ");
+        ListGoals();
+        Console.Write("Which goal did you accomplish? ");
         int userChoice = int.Parse(Console.ReadLine()) - 1;
+        Console.Clear();
         int points = _goals[userChoice].RecordEvent();
         _score += points;
-        System.Console.WriteLine($"You earned {points} points.");
+        System.Console.WriteLine("Good Job!");
+        Console.WriteLine($"You earned {points} points.");
     }
 
     public void SaveGoals()
     {
+        string fileName = "goals.txt";
+        using (StreamWriter goalsFile = new StreamWriter(fileName))
+        {
+            goalsFile.WriteLine(_score);
 
+            foreach (Goal goal in _goals)
+            {
+
+                goalsFile.WriteLine(goal.GetStringRepresentation());
+            }
+        }
+        System.Console.WriteLine($"Goals saved to {fileName}");
     }
-
     public void LoadGoals()
     {
+        _goals.Clear();
+        string filename = "goals.txt";
+        string[] fileLines = System.IO.File.ReadAllLines(filename);
+        _score = int.Parse(fileLines[0]);
+
+        for (int i = 1; i < fileLines.Length; i++)
+        {
+            string[] goalParts = fileLines[i].Split("|");
+            switch (goalParts[0])
+            {
+                case "SimpleGoal":
+                    _goals.Add(new SimpleGoal(goalParts[1], goalParts[2], int.Parse(goalParts[3]), bool.Parse(goalParts[4])));
+                    break;
+                case "EternalGoal":
+                    _goals.Add(new EternalGoal(goalParts[1], goalParts[2], int.Parse(goalParts[3])));
+                    break;
+                case "ChecklistGoal":
+                    _goals.Add(new ChecklistGoal(goalParts[1], goalParts[2], int.Parse(goalParts[3]), int.Parse(goalParts[4]), int.Parse(goalParts[5]), int.Parse(goalParts[6])));
+                    break;
+            }
+        }
+        System.Console.WriteLine($"Goals loaded from {filename}");
+
 
     }
+
+    public void DeleteGoal()
+    {
+        ListGoals();
+        System.Console.Write("Which goal would you like to delete? ");
+        int userAnswer = int.Parse(Console.ReadLine()) - 1;
+        Console.Clear();
+        System.Console.WriteLine($"This is the goal you selected:");
+        System.Console.WriteLine($"{_goals[userAnswer].GetDetailsString()}");
+        System.Console.Write("Are you sure you want to delete this goal? (y/n) ");
+        string userResponse = Console.ReadLine().ToLower();
+        _goals.RemoveAt(userAnswer);
+        Console.Clear();
+        System.Console.WriteLine("Goal Deleted");
+
+    }   
 }

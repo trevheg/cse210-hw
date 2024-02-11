@@ -2,38 +2,38 @@ using System.Runtime;
 
 public class ChecklistGoal : Goal
 {
+    private string _shortName;
+    private string _description;
+    private int _points;
     private int _amountCompleted;
     private int _target;
     private int _bonus;
-    public ChecklistGoal(string name, string description, int points, int target, int bonus) : base(name, description, points)
+    public ChecklistGoal(string name, string description, int points, int amountCompleted, int target, int bonus) : base(name, description, points)
     {
+        _shortName = name;
+        _description = description;
+        _points = points;
+        _amountCompleted = amountCompleted;
         _target = target;
         _bonus = bonus;
     }
 
     public override int RecordEvent()
     {
-        int points = 0;
+        int points = _points;
+        _amountCompleted++;
         if (_amountCompleted == _target)
         {
-            points += base.RecordEvent();
             points += _bonus;
+            System.Console.WriteLine("You achieved your meta goal, good job!");
         }
-        else if (_amountCompleted < _target)
-        {
-        points += base.GetPoints();
-        }
-        _amountCompleted++;
         return points;
     }
-    // public override bool IsComplete()
-    // {
-    //     return true;
-    // }
+
     public override string GetDetailsString()
     {
         string checkbox = "[ ]";
-        if (IsComplete())
+        if (_amountCompleted >= _target)
         {
             checkbox = "[X]";
         }
@@ -42,6 +42,7 @@ public class ChecklistGoal : Goal
     }
     public override string GetStringRepresentation()
     {
-        return "";
+        
+        return $"{this.GetType()}|{_shortName}|{_description}|{_points}|{_amountCompleted}|{_target}|{_bonus}";
     }
 }
