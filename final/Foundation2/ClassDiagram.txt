@@ -1,0 +1,49 @@
+Program: Encapsulation with Online Ordering
+// Has classes for Orders, as well as the Customer and Products of each order, and the Address of the customer. Creates shipping labels and calculates order prices.
+
+// all member variables are private and getters, setters, and constructors should be created as needed. 
+
+Class: Main
+* _orders : List<Order>
+* CreateOrders() : List<Order> // creates a List of Order objects
+* PrintOrders(List<Order> orders) // prints the List of Order objects and their details. 
+
+
+Class: Order
+// Information about an order placed in an onilne shop
+Attributes:
+* _products : List<Product>
+* _customer : Customer
+* _DomesticShippingCost : int
+* _IntlShippingCost : int
+Behaviors:
+* ReturnShippingLabel(Customer customer) : string
+* ReturnPackingLabel(products : List<Product>) : string
+* CalculateTotalPrice(products : List<Product>, shippingCost : int) : int
+
+Class: Product
+// Stores information and quantity of products in Order
+Attributes:
+* _name : string
+* _productId : int 
+* _price : int
+* _quantity : int
+Behaviors:
+* GetTotalCost(int price, int quantity) : int 
+
+Class: Customer
+// Stores information about the customer making the Order
+Attributes:
+* _name : string
+* _address : class
+Behaviors:
+* LivesUSA(address : Address) : bool
+
+Class: Address
+// The address of the Customer
+Attributes:
+* _streetAddress : string 
+Behaviors:
+* InUSA() : bool 
+* ReturnAddressString() : string 
+

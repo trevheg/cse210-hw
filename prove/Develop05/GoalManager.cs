@@ -146,7 +146,6 @@ public class GoalManager
 
             foreach (Goal goal in _goals)
             {
-
                 goalsFile.WriteLine(goal.GetStringRepresentation());
             }
         }

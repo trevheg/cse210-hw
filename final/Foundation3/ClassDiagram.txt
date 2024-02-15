@@ -1,0 +1,45 @@
+Program: Ineritance with Event Planning
+// Tracks three kinds of events (each based on a base Event class) along with details of those events. Returns the details upon demand. 
+
+Class : Main:
+Attributes:
+* _events : List<Event>
+Behaviors:
+* CreateEvents() : List<Event> // creates one of each event type and saves them to a list 
+* ListEvents() : void // prints the details of the Event classes in the List
+
+
+Class: Event
+// Information about a generic event. Will probably be abstract.
+Attributes:
+* _title : string
+* _description : string
+* _date : DateTime
+* _Time : DateTime
+* _address : string
+Behaviors:
+* ListStandardDetails() : void // Lists the title, description, date, time, and address.
+
+Class: Lecture : Event
+// A child of the Event class. Has information about a lecture.
+Attributes: 
+* _speakerName : string
+* _capacity : int
+Behaviors:
+* ListFullDetails() : void // Lists details from ListStandardDetails() as well as speaker name and capacity. 
+
+Class: Reception : Event
+// A child of the Event class. Has information about a reception. 
+Attributes:
+* _email : string
+Behaviors:
+* ListFullDetails() : void // Lists details from ListStandardDetails() as well as an email for RSVP
+
+Class: OutdoorGathering : Event
+// A child of the Event class. Has information about an outdoor gathering. 
+Attributes:
+* _weatherStatement : string
+Behaviors:
+* ListFullDetails() : void // Lists details from ListStandardDetails() as well as a statement of the weather. 
+
+

@@ -1,0 +1,35 @@
+Program: Polymorphism with Exercise Tracking
+// Tracks three kinds of exercises at a fitness center, along with date, length, and distance. It should provide derived values such as pace and speed when prompted. 
+
+Class: Main
+Attributes: 
+* _activities : List<Activity> 
+Behaviors:
+* CreateActivities() : List<Activity>
+* DisplaySummary() : void 
+
+Class: Activity
+// stores information about an exercise. Probably abstract. 
+Attributes:
+* _date : DateTime
+* _length : float
+Behaviors:
+* GetMeters() : float virtual
+* GetKPH() : float virtual 
+* GetPaceMPK() : float virtual 
+* GetSummary : string  
+
+Class: Running : Activity
+Attributes:
+* _distance : float
+Behaviors:
+
+Class: StationaryBicycle : Activity
+Attributes:
+* _speed : float
+Behaviors:
+
+Class: SwimmingLaps : Activity 
+Attributes:
+* _laps : int 
+Behaviors:
